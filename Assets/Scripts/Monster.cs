@@ -195,11 +195,10 @@ public class Monster : MonoBehaviour
             Destroy(gameObject);
         }
         else
-        {
+        { 
             transform.GetComponent<BoxCollider2D>().isTrigger = true;
             GetComponent<PathFinding>().moveSpeed = 0; 
         }
-
 
         _IsSoul = _isSoul.Death;
     }
