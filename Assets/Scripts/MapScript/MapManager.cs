@@ -9,7 +9,7 @@ public class MapManager : MonoBehaviour
     grid_tistory grid_Tistory;
 
     bool isWaveOver;
-    int highTileMap = 0;
+    int highTileMap = -1;
     int nowTileMap = 0;
 
     private void Start()

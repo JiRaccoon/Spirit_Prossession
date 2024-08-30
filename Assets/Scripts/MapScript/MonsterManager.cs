@@ -22,6 +22,11 @@ public class MonsterManager : MonoBehaviour
         //얼라이브몬스터 비우기
         if(Input.GetKeyDown(KeyCode.Keypad0))
             TestRemoveAll();
+
+        if (Input.GetMouseButtonDown(0))
+        {
+            ActiveWaveSpawn();
+        }
     }
 
     //타일맵에 맞는 몬스터 스폰 액티브
