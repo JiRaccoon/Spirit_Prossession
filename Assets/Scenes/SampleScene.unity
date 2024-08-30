@@ -1342,6 +1342,63 @@ MonoBehaviour:
   range: 3
   isWalk: 0
   isWalking: 0
+--- !u!1001 &8589295337018661632
+PrefabInstance:
+  m_ObjectHideFlags: 0
+  serializedVersion: 2
+  m_Modification:
+    serializedVersion: 3
+    m_TransformParent: {fileID: 0}
+    m_Modifications:
+    - target: {fileID: 5285278103678399710, guid: b82665153c9870042907a1b1f2c9ae4f, type: 3}
+      propertyPath: m_LocalPosition.x
+      value: 3.53
+      objectReference: {fileID: 0}
+    - target: {fileID: 5285278103678399710, guid: b82665153c9870042907a1b1f2c9ae4f, type: 3}
+      propertyPath: m_LocalPosition.y
+      value: 0.14023972
+      objectReference: {fileID: 0}
+    - target: {fileID: 5285278103678399710, guid: b82665153c9870042907a1b1f2c9ae4f, type: 3}
+      propertyPath: m_LocalPosition.z
+      value: 0.052131016
+      objectReference: {fileID: 0}
+    - target: {fileID: 5285278103678399710, guid: b82665153c9870042907a1b1f2c9ae4f, type: 3}
+      propertyPath: m_LocalRotation.w
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 5285278103678399710, guid: b82665153c9870042907a1b1f2c9ae4f, type: 3}
+      propertyPath: m_LocalRotation.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 5285278103678399710, guid: b82665153c9870042907a1b1f2c9ae4f, type: 3}
+      propertyPath: m_LocalRotation.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 5285278103678399710, guid: b82665153c9870042907a1b1f2c9ae4f, type: 3}
+      propertyPath: m_LocalRotation.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 5285278103678399710, guid: b82665153c9870042907a1b1f2c9ae4f, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 5285278103678399710, guid: b82665153c9870042907a1b1f2c9ae4f, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 5285278103678399710, guid: b82665153c9870042907a1b1f2c9ae4f, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 7482101583819555311, guid: b82665153c9870042907a1b1f2c9ae4f, type: 3}
+      propertyPath: m_Name
+      value: Goblin
+      objectReference: {fileID: 0}
+    m_RemovedComponents: []
+    m_RemovedGameObjects: []
+    m_AddedGameObjects: []
+    m_AddedComponents: []
+  m_SourcePrefab: {fileID: 100100000, guid: b82665153c9870042907a1b1f2c9ae4f, type: 3}
 --- !u!1660057539 &9223372036854775807
 SceneRoots:
   m_ObjectHideFlags: 0
@@ -1353,4 +1410,8 @@ SceneRoots:
   - {fileID: 177826465}
   - {fileID: 1210588988}
   - {fileID: 678152449}
+<<<<<<< Updated upstream
   - {fileID: 596032228}
+=======
+  - {fileID: 8589295337018661632}
+>>>>>>> Stashed changes
