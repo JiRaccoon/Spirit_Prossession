@@ -145,8 +145,11 @@ public class GreenSlime : Monster
 
         _object.GetComponent<Bullet>().Dmg = stats._Atk; //총알에 공격력
         _object.GetComponent<Bullet>().MyObj = gameObject.name; //총알이 자기자신안떄리게
+        _object.GetComponent<Bullet>().Break = true;
         _object2.GetComponent<Bullet>().Dmg = stats._Atk; //총알에 공격력
         _object2.GetComponent<Bullet>().MyObj = gameObject.name; //총알이 자기자신안떄리게
+        _object2.GetComponent<Bullet>().Break = true;
+
 
     }
     public IEnumerator AutoShot() //자동공격
