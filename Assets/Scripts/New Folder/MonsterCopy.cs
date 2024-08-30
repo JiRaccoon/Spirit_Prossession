@@ -5,7 +5,7 @@ using Unity.VisualScripting.Antlr3.Runtime.Misc;
 using UnityEngine;
 using UnityEngine.EventSystems;
 
-public class Monster : MonoBehaviour
+public class MonsterCopy : MonoBehaviour
 {
     protected enum _isSoul { PlayerOne = 1, PlayerTwo, NULL, Death } // player's soul
     [SerializeField]
@@ -16,8 +16,6 @@ public class Monster : MonoBehaviour
     private Sprite[] _SoulSprits;
     [SerializeField]
     protected GameObject _StayObj;
-    [SerializeField]
-    private GameObject _HpPoint;
 
     [SerializeField]
     protected _isSoul _IsSoul;
@@ -41,8 +39,6 @@ public class Monster : MonoBehaviour
 
     protected float lastShootTime;
 
-    private Camera mainCamera;
-
 
     protected void Init(float[] argStats) 
     {
@@ -55,7 +51,6 @@ public class Monster : MonoBehaviour
         rb = GetComponent<Rigidbody2D>();
         animator = GetComponent<Animator>();
         _Ddir = Vector2.zero; // 샌즈때문에 넣었어요 - 손준호
-        mainCamera = Camera.main;
     }
 
     private void Update()
@@ -146,23 +141,9 @@ public class Monster : MonoBehaviour
 
         // 이동 벡터 생성
         moveDirection = new Vector2(moveX, moveY).normalized;
-        if (_IsSoul != _isSoul.NULL) _Ddir = bulletDirection; // 샌즈때문에 넣었어요 - 손준호
-
+        if(_IsSoul != _isSoul.NULL) _Ddir = bulletDirection; // 샌즈때문에 넣었어요 - 손준호
         // 이동 적용
-        Vector2 newPosition = rb.position + moveDirection * stats._MoveSpeed * Time.deltaTime;
-
-        // 화면 경계 계산
-        float screenWidth = mainCamera.orthographicSize * mainCamera.aspect;
-        float screenHeight = mainCamera.orthographicSize;
-
-        // 화면 경계 내로 위치 제한
-        newPosition.x = Mathf.Clamp(newPosition.x, -screenWidth, screenWidth);
-        newPosition.y = Mathf.Clamp(newPosition.y, -screenHeight, screenHeight);
-
-        rb.MovePosition(newPosition);
-
-        // 이동 적용
-        //rb.MovePosition(rb.position + moveDirection * stats._MoveSpeed * Time.deltaTime);
+        rb.MovePosition(rb.position + moveDirection * stats._MoveSpeed * Time.deltaTime);
     }
 
 
@@ -216,10 +197,11 @@ public class Monster : MonoBehaviour
             Destroy(gameObject);
         }
         else
-        { 
+        {
             transform.GetComponent<BoxCollider2D>().isTrigger = true;
             GetComponent<PathFinding>().moveSpeed = 0; 
         }
+
 
         _IsSoul = _isSoul.Death;
     }
@@ -228,15 +210,7 @@ public class Monster : MonoBehaviour
     {
         if (stats._Hp <= 0) return;
         stats._Hp -= argDmg;
-        //Debug.Log(stats._Hp);
-
-        if(_IsSoul!=_isSoul.NULL)
-        {
-            if(transform.GetChild(2).childCount > 0)
-            {
-                StartCoroutine(HPLight());
-            }
-        }
+        Debug.Log(stats._Hp);
 
         if(stats._Hp <= 0)
         {
@@ -248,13 +222,6 @@ public class Monster : MonoBehaviour
             StartCoroutine(HitHighlight());
         }
         
-    }
-    private IEnumerator HPLight()
-    {
-        transform.GetChild(2).gameObject.SetActive(true);
-        Destroy(transform.GetChild(2).GetChild(0).gameObject);
-        yield return new WaitForSeconds(0.3f);
-        transform.GetChild(2).gameObject.SetActive(false);
     }
 
     public bool checkAi()
@@ -276,9 +243,9 @@ public class Monster : MonoBehaviour
         if (Input.GetKey(KeyCode.F) || Input.GetKey(KeyCode.K))
         {
             _StayObj.tag = "Player";
-            _StayObj.GetComponent<Monster>()._IsSoul = _IsSoul == _isSoul.PlayerOne ? _isSoul.PlayerTwo : _isSoul.PlayerOne;
+            _StayObj.GetComponent<MonsterCopy>()._IsSoul = _IsSoul == _isSoul.PlayerOne ? _isSoul.PlayerTwo : _isSoul.PlayerOne;
             _StayObj.name = _IsSoul == _isSoul.PlayerOne ? "PlayerTwo" : "PlayerOne";
-            _StayObj.GetComponent<Monster>().ResetStat();
+            _StayObj.GetComponent<MonsterCopy>().ResetStat();
             if (_StayObj.GetComponent<Sans>())
             {// 샌즈때문에 넣었어요 - 손준호
                 _StayObj.GetComponent<Sans>().ReInitPlayerModeStat();
@@ -297,13 +264,6 @@ public class Monster : MonoBehaviour
         grid._Player_transform[pNum] = gameObject;
         transform.GetChild(pNum).gameObject.SetActive(true);
         gameObject.tag = "Player";
-
-        for (int i = 0; i < stats._MaxHp + 1; i++)
-        {
-            Instantiate(_HpPoint);
-        }
-        
-        StartCoroutine(HPLight());
     }
 
     private void OnTriggerEnter2D(Collider2D collision)
@@ -315,7 +275,7 @@ public class Monster : MonoBehaviour
 
         if(collision.GetComponent<Monster>()) 
         {
-            if(collision.GetComponent<Monster>()._IsSoul == _isSoul.Death && _HaveSoul)
+            if(collision.GetComponent<MonsterCopy>()._IsSoul == _isSoul.Death && _HaveSoul)
                 _StayObj = collision.gameObject;
         }
 
@@ -324,7 +284,7 @@ public class Monster : MonoBehaviour
     {
         if (collision.GetComponent<Monster>())
         {
-            if (collision.GetComponent<Monster>()._IsSoul == _isSoul.Death)
+            if (collision.GetComponent<MonsterCopy>()._IsSoul == _isSoul.Death)
                 _StayObj = null;
         }
     }
