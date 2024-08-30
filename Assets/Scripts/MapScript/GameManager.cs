@@ -6,9 +6,7 @@ public class GameManager : MonoBehaviour
 {
     private void Start()
     {
-        //Invoke("FrameSet", 1f);
         FrameSet();
-        DontDestroyOnLoad(this);
     }
 
     void FrameSet()

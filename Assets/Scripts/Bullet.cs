@@ -12,12 +12,21 @@ public class Bullet : MonoBehaviour
 
     private void OnTriggerEnter2D(Collider2D collision)
     {
-        if (_MyObj == collision.name) return;
+        if (collision.transform.GetComponent<BreakTile>() != null)
+        {
+            Vector2 closestPoint = collision.ClosestPoint(transform.position);
+            collision.transform.GetComponent<BreakTile>().MakeDot(closestPoint);
+        }
 
-        if(collision.gameObject.GetComponent<Monster>())
+
+        if (_MyObj == collision.name) return;
+        if (collision.tag == "Soul" || collision.tag == "Bullet" || collision.gameObject.GetComponent<BoxCollider2D>().isTrigger)
+            return;
+               
+
+        if (collision.gameObject.GetComponent<Monster>())
         collision.gameObject.GetComponent<Monster>().takeDamage(_Dmg);
 
-        if(collision.tag!="Bullet")
-            Destroy(gameObject);
+        Destroy(gameObject);
     }
 }

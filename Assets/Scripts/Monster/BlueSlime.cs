@@ -33,6 +33,7 @@ public class BlueSlime : Monster
         lastShootTime = Time.time;
         if (_StayObj != null) return;
         animator.SetTrigger("Attack"); //애니메이션 공격은 어택 죽음은 데스로 통일
+
         GameObject _object = Instantiate(Bullet, transform.position, Quaternion.identity); //총알소환
         if(_IsSoul == _isSoul.NULL) //에이아이일때
         {
