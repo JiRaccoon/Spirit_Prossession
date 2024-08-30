@@ -10,16 +10,25 @@ public class MonsterManager : MonoBehaviour
 
     public int tileMapNumber = 0;
 
-    public bool IsEndWave = false;
+    public bool IsMonsterAllDie = false;
 
     private void Start()
     {
         aliveMonsters = new List<GameObject>();
     }
 
+    private void Update()
+    {
+        //얼라이브몬스터 비우기
+        if(Input.GetKeyDown(KeyCode.Keypad0))
+            TestRemoveAll();
+    }
+
     //타일맵에 맞는 몬스터 스폰 액티브
     public void ActiveWaveSpawn()
     {
+        IsMonsterAllDie = false;
+
         if (null == waveSpawnParent[tileMapNumber])
         {
             Debug.LogError("MonsterManager::ActiveWaveSpawn()["+ tileMapNumber +"번째 waveSpanwnParent is Null");
@@ -37,17 +46,35 @@ public class MonsterManager : MonoBehaviour
         }
     }
 
+    public bool GetIsMonsterAllDie()
+    {
+        return IsMonsterAllDie;
+    }
+
     public void AddAliveMonster(GameObject monster)
     {
         aliveMonsters.Add(monster);
     }
 
-    public bool CheckAliveMonsters()
+    //몬스터에서 사라질때 실행
+    public void RemoveMonster(GameObject monster)
+    {
+        aliveMonsters.Remove(monster);
+        CheckAliveMonsters();
+    }
+
+    public void TestRemoveAll()
+    {
+        aliveMonsters.Clear();
+        CheckAliveMonsters();
+    }
+
+    public void CheckAliveMonsters()
     {
        if(aliveMonsters.Count == 0)
        {
-            return true;
+           IsMonsterAllDie = true;
        }
-        return false;
+        IsMonsterAllDie = false;
     }
 }

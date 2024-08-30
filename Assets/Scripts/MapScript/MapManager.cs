@@ -6,16 +6,26 @@ public class MapManager : MonoBehaviour
 {
     MonsterManager monsterManager;
     MoveMapCam moveMapCam;
+    grid_tistory grid_Tistory;
 
     bool isWaveOver;
     int highTileMap = 0;
-    int nowTileMpa = 0;
+    int nowTileMap = 0;
 
-    
 
-    void UpdateHightTileMap()
+    private void Update()
     {
-        //highTileMap = moveMapCam.
+        UpdateTileMap();
     }
 
+    void UpdateTileMap()
+    {
+        if (highTileMap < grid_Tistory.tileMapNumber)
+        {
+            highTileMap = grid_Tistory.tileMapNumber;
+            monsterManager.ActiveWaveSpawn();
+        }
+
+        nowTileMap = grid_Tistory.tileMapNumber;
+    }
 }
