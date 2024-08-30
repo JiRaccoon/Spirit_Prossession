@@ -9,6 +9,7 @@ public class MoveMapCam : MonoBehaviour
     [SerializeField] private GameObject _moveobjR;
     private grid_tistory _gt;
     private int _tmp;
+    public bool _check;
 
     private void Start()
     {
@@ -99,7 +100,7 @@ public class MoveMapCam : MonoBehaviour
                 _gt.tileMapNumber++;
             }
         }
-
+        _check = false;
         
     }
 }

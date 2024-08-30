@@ -21,7 +21,11 @@ public class TriggerPoint : MonoBehaviour
     {
         if(other.gameObject.CompareTag("Player"))
         {
-            _mg.MoveMap(_tmpnum);
+            if (!_mc._check)
+            {
+                _mc._check = true;
+                _mg.MoveMap(_tmpnum);
+            }
         }
     }
 }
