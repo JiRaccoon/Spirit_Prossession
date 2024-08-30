@@ -134,6 +134,8 @@ public class MoveMapCam : MonoBehaviour
 
         _moveobjL.gameObject.SetActive(false);
         _moveobjR.gameObject.SetActive(false);
+
+        _mm.isWaveOver = false;
         _check = false;
 
     }

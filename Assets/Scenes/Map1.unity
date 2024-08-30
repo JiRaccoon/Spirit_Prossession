@@ -3703,11 +3703,11 @@ PrefabInstance:
     m_Modifications:
     - target: {fileID: 1396608651791985237, guid: e04baa346da44244ebbd37cc07857477, type: 3}
       propertyPath: m_LocalPosition.x
-      value: 3.3714306
+      value: -3.93
       objectReference: {fileID: 0}
     - target: {fileID: 1396608651791985237, guid: e04baa346da44244ebbd37cc07857477, type: 3}
       propertyPath: m_LocalPosition.y
-      value: 0.034613013
+      value: -2.16
       objectReference: {fileID: 0}
     - target: {fileID: 1396608651791985237, guid: e04baa346da44244ebbd37cc07857477, type: 3}
       propertyPath: m_LocalPosition.z
@@ -4489,7 +4489,7 @@ GameObject:
   - component: {fileID: 225238538}
   m_Layer: 0
   m_Name: MonsterManager
-  m_TagString: Untagged
+  m_TagString: MonsterManager
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -4510,7 +4510,7 @@ MonoBehaviour:
   - {fileID: 407792520}
   - {fileID: 1764182256}
   - {fileID: 1523376869}
-  mapmanager: {fileID: 0}
+  mapmanager: {fileID: 1891772358}
   tileMapNumber: 0
   IsMonsterAllDie: 0
   monsterCount: 0
@@ -12963,11 +12963,11 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 1396608651791985237, guid: e04baa346da44244ebbd37cc07857477, type: 3}
       propertyPath: m_LocalPosition.x
-      value: -1.3424497
+      value: -3.93
       objectReference: {fileID: 0}
     - target: {fileID: 1396608651791985237, guid: e04baa346da44244ebbd37cc07857477, type: 3}
       propertyPath: m_LocalPosition.y
-      value: 0.50537705
+      value: -1.2
       objectReference: {fileID: 0}
     - target: {fileID: 1396608651791985237, guid: e04baa346da44244ebbd37cc07857477, type: 3}
       propertyPath: m_LocalPosition.z

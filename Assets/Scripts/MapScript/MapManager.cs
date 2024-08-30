@@ -31,6 +31,7 @@ public class MapManager : MonoBehaviour
         if (highTileMap < grid_Tistory.tileMapNumber)
         {
             highTileMap = grid_Tistory.tileMapNumber;
+            monsterManager.tileMapNumber = grid_Tistory.tileMapNumber;
             monsterManager.ActiveWaveSpawn();
         }
         
