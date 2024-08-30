@@ -4,9 +4,9 @@ using UnityEngine;
 
 public class MapManager : MonoBehaviour
 {
-    MonsterManager monsterManager;
+    public MonsterManager monsterManager;
     private MoveMapCam moveMapCam;
-    grid_tistory grid_Tistory;
+    private grid_tistory grid_Tistory;
 
     bool isWaveOver;
     int highTileMap = -1;
@@ -15,6 +15,7 @@ public class MapManager : MonoBehaviour
     private void Start()
     {
         moveMapCam = GetComponent<MoveMapCam>();
+        grid_Tistory = GetComponent<grid_tistory>();
     }
 
     private void Update()
@@ -45,6 +46,7 @@ public class MapManager : MonoBehaviour
 
         if(check)
         {
+            Debug.Log(1);
             moveMapCam.MoveTriggerinstantiate();
         }
     }

@@ -81,5 +81,6 @@ public class MonsterManager : MonoBehaviour
            IsMonsterAllDie = true;
        }
         IsMonsterAllDie = false;
+        Debug.Log(IsMonsterAllDie);
     }
 }
