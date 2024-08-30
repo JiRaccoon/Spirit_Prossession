@@ -18,8 +18,8 @@ public class Monster : MonoBehaviour
     protected GameObject _StayObj;
 
     [SerializeField]
-    private _isSoul _IsSoul;
-    protected struct _Stats { // Monsters Stats
+    protected _isSoul _IsSoul;
+    public struct _Stats { // Monsters Stats
         public float _MaxHp;
         public float _Hp; 
         public float _Atk;
@@ -30,13 +30,15 @@ public class Monster : MonoBehaviour
 
     protected Vector2 bulletDirection = Vector2.up;
 
-    protected _Stats stats; // Add a field to store the _Stats struct
+    public _Stats stats; // Add a field to store the _Stats struct
 
     Rigidbody2D rb;
 
     protected Animator animator;
 
-    
+    protected float lastShootTime;
+
+
     protected void Init(float[] argStats) 
     {
         stats._MaxHp = argStats[0];
@@ -195,7 +197,7 @@ public class Monster : MonoBehaviour
         else
         {
             transform.GetComponent<BoxCollider2D>().isTrigger = true;
-
+            GetComponent<PathFinding>().moveSpeed = 0; 
         }
 
 
@@ -218,6 +220,11 @@ public class Monster : MonoBehaviour
             StartCoroutine(HitHighlight());
         }
         
+    }
+
+    public bool checkAi()
+    {
+       return  _IsSoul == _isSoul.NULL ? true : false;
     }
 
     private IEnumerator HitHighlight()
@@ -246,6 +253,11 @@ public class Monster : MonoBehaviour
         stats._Hp = stats._MaxHp;
         GetComponent<BoxCollider2D>().isTrigger = false;
         animator.SetBool("Death", false);
+        Grid grid =GameObject.Find("Astar").GetComponent<Grid>();
+        int pNum = _IsSoul == _isSoul.PlayerOne ? 0 : 1;
+        grid._Player_transform[pNum] = gameObject;
+        transform.GetChild(pNum).gameObject.SetActive(true);
+        gameObject.tag = "Player";
     }
 
     private void OnTriggerEnter2D(Collider2D collision)

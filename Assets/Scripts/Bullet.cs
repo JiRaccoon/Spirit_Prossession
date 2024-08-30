@@ -16,5 +16,8 @@ public class Bullet : MonoBehaviour
 
         if(collision.gameObject.GetComponent<Monster>())
         collision.gameObject.GetComponent<Monster>().takeDamage(_Dmg);
+
+        if(collision.tag!="Bullet")
+            Destroy(gameObject);
     }
 }
