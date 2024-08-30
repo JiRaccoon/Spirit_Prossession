@@ -6,48 +6,40 @@ using System.Linq;
 public class MonsterManager : MonoBehaviour
 {
     List<GameObject> aliveMonsters;
-    Dictionary<string, GameObject> monsterName;
-
     public List<GameObject> waveSpawnParent; //웨이브 타일 패런트를 다 넣어야함
-    public List<Transform> waveChildSpawnPoint;
 
+    public int tileMapNumber = 0;
 
-    public Dictionary<float, GameObject> spawnPoint;
-
-    int tileMapNumber = 0;
+    public bool IsEndWave = false;
 
     private void Start()
     {
-        spawnPoint = new Dictionary<float, GameObject>();
         aliveMonsters = new List<GameObject>();
-        waveSpawnParent = new List<GameObject>();
     }
 
-    private void Update()
+    //타일맵에 맞는 몬스터 스폰 액티브
+    public void ActiveWaveSpawn()
     {
-        
-    }
-
-    //타일맵에 맞는 스폰포인트 업데이트
-    public void UpdateWaveSpawn()
-    {
-        spawnPoint.Clear();
-
-        for (int i = 0; i < waveSpawnParent[tileMapNumber].transform.childCount; i++)
+        if (null == waveSpawnParent[tileMapNumber])
+        {
+            Debug.LogError("MonsterManager::ActiveWaveSpawn()["+ tileMapNumber +"번째 waveSpanwnParent is Null");
+        }
+        waveSpawnParent[tileMapNumber].SetActive(true);
+        for(int i=0; i < waveSpawnParent[tileMapNumber].transform.childCount; i++)
         {
             SpawnPoint _spawnPoint = waveSpawnParent[tileMapNumber].transform.GetChild(i).GetComponent<SpawnPoint>();
-            spawnPoint.Add(_spawnPoint.spawnTime, _spawnPoint.gameObject);
+            if (null == _spawnPoint.monster)
+            {
+                Debug.LogError("MonsterManager::ActiveWaveSpawn()[" + (i + 1) + "번째 몬스터 is Null");
+            }
+            else
+                _spawnPoint.CreateEnemy();
         }
     }
 
-    public void CreateMonsters()
+    public void AddAliveMonster(GameObject monster)
     {
-
-    }
-
-    private void SpawnMonster()
-    {
-
+        aliveMonsters.Add(monster);
     }
 
     public bool CheckAliveMonsters()
@@ -56,7 +48,6 @@ public class MonsterManager : MonoBehaviour
        {
             return true;
        }
-
         return false;
     }
 }

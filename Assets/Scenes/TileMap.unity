@@ -2138,8 +2138,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 36e6c1ce2e1a33842942fbec38a5f72b, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  waveSpawnParent: []
-  waveChildSpawnPoint: []
+  waveSpawnParent:
+  - {fileID: 407792520}
+  - {fileID: 1764182256}
+  - {fileID: 1523376869}
+  tileMapNumber: 0
 --- !u!4 &225238539
 Transform:
   m_ObjectHideFlags: 0
@@ -2148,7 +2151,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 225238537}
   serializedVersion: 2
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
@@ -4147,12 +4150,12 @@ GameObject:
   m_Component:
   - component: {fileID: 407792521}
   m_Layer: 0
-  m_Name: TileMap1
+  m_Name: TileMap0
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!4 &407792521
 Transform:
   m_ObjectHideFlags: 0
@@ -4273,6 +4276,14 @@ PrefabInstance:
     - target: {fileID: 4483016058502823776, guid: 88d07c4db170a99418e86ac0f8b0a0a9, type: 3}
       propertyPath: m_Name
       value: SpawnPoint (1)
+      objectReference: {fileID: 0}
+    - target: {fileID: 7178429739001715463, guid: 88d07c4db170a99418e86ac0f8b0a0a9, type: 3}
+      propertyPath: monster
+      value: 
+      objectReference: {fileID: 3699835251435034019, guid: c7311e6eeb097dc48874471907639259, type: 3}
+    - target: {fileID: 7178429739001715463, guid: 88d07c4db170a99418e86ac0f8b0a0a9, type: 3}
+      propertyPath: spawnTime
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 7178429739001715463, guid: 88d07c4db170a99418e86ac0f8b0a0a9, type: 3}
       propertyPath: gameObject
@@ -4637,12 +4648,12 @@ GameObject:
   m_Component:
   - component: {fileID: 1523376870}
   m_Layer: 0
-  m_Name: TileMap3
+  m_Name: TileMap2
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!4 &1523376870
 Transform:
   m_ObjectHideFlags: 0
@@ -4752,12 +4763,12 @@ GameObject:
   m_Component:
   - component: {fileID: 1764182257}
   m_Layer: 0
-  m_Name: TileMap2
+  m_Name: TileMap1
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!4 &1764182257
 Transform:
   m_ObjectHideFlags: 0
@@ -6768,6 +6779,14 @@ PrefabInstance:
       value: SpawnPoint
       objectReference: {fileID: 0}
     - target: {fileID: 7178429739001715463, guid: 88d07c4db170a99418e86ac0f8b0a0a9, type: 3}
+      propertyPath: monster
+      value: 
+      objectReference: {fileID: 3699835251435034019, guid: c7311e6eeb097dc48874471907639259, type: 3}
+    - target: {fileID: 7178429739001715463, guid: 88d07c4db170a99418e86ac0f8b0a0a9, type: 3}
+      propertyPath: spawnTime
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 7178429739001715463, guid: 88d07c4db170a99418e86ac0f8b0a0a9, type: 3}
       propertyPath: gameObject
       value: 
       objectReference: {fileID: 3699835251435034019, guid: c7311e6eeb097dc48874471907639259, type: 3}
@@ -6895,5 +6914,5 @@ SceneRoots:
   - {fileID: 822171688}
   - {fileID: 7606733904385693874}
   - {fileID: 1726044081}
-  - {fileID: 1706726470}
   - {fileID: 225238539}
+  - {fileID: 1706726470}
