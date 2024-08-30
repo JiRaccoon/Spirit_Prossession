@@ -76,11 +76,14 @@ public class MonsterManager : MonoBehaviour
 
     public void CheckAliveMonsters()
     {
-       if(aliveMonsters.Count == 0)
-       {
-           IsMonsterAllDie = true;
-       }
-        IsMonsterAllDie = false;
+        if (aliveMonsters.Count == 0)
+        {
+            IsMonsterAllDie = true;
+        }
+        else
+        {
+            IsMonsterAllDie = false;
+        }
         Debug.Log(IsMonsterAllDie);
     }
 }
