@@ -24,10 +24,13 @@ public class Slime : Monster
         if (Time.time < lastShootTime + stats._ShotDelay)
             return;
         // Slime's Attack
+        lastShootTime = Time.time;
+        if (_StayObj != null) return;
+        animator.SetTrigger("Attack");
         GameObject _object = Instantiate(Bullet, transform.position, Quaternion.identity);
         _object.GetComponent<Rigidbody2D>().AddForce(bulletDirection * stats._BulletSpeed, ForceMode2D.Force);
         _object.GetComponent<Bullet>().Dmg = stats._Atk;
         _object.GetComponent<Bullet>().MyObj = gameObject.name;
-        lastShootTime = Time.time;
+        
     }
 }

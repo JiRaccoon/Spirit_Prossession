@@ -13,7 +13,9 @@ public class Monster : MonoBehaviour
     [SerializeField]
     private GameObject _PlayerSoul;
     [SerializeField]
-    private GameObject _StayObj;
+    private Sprite[] _SoulSprits;
+    [SerializeField]
+    protected GameObject _StayObj;
 
     [SerializeField]
     private _isSoul _IsSoul;
@@ -32,6 +34,8 @@ public class Monster : MonoBehaviour
 
     Rigidbody2D rb;
 
+    protected Animator animator;
+
     
     protected void Init(float[] argStats) 
     {
@@ -42,6 +46,7 @@ public class Monster : MonoBehaviour
         stats._BulletSpeed = argStats[3];
         stats._ShotDelay = argStats[4];
         rb = GetComponent<Rigidbody2D>();
+        animator = GetComponent<Animator>();
     }
 
     private void Update()
@@ -56,6 +61,8 @@ public class Monster : MonoBehaviour
     {
         float moveX = 0f;
         float moveY = 0f;
+
+        SpriteRenderer spriteRenderer = GetComponent<SpriteRenderer>();
 
         Vector2 moveDirection = new Vector2();
 
@@ -84,6 +91,7 @@ public class Monster : MonoBehaviour
             {
                 moveX -= 1f;
                 bulletDirection = new Vector2(-1, 0);
+                spriteRenderer.flipX = true;
             }
 
             // D 또는 오른쪽 방향키를 눌렀을 때
@@ -91,6 +99,7 @@ public class Monster : MonoBehaviour
             {
                 moveX += 1f;
                 bulletDirection = new Vector2(1, 0);
+                spriteRenderer.flipX = false;
             }
         }
         else if (_IsSoul == _isSoul.PlayerTwo)
@@ -114,6 +123,7 @@ public class Monster : MonoBehaviour
             {
                 moveX -= 1f;
                 bulletDirection = new Vector2(-1, 0);
+                spriteRenderer.flipX = true;
             }
 
             // D 또는 오른쪽 방향키를 눌렀을 때
@@ -121,6 +131,7 @@ public class Monster : MonoBehaviour
             {
                 moveX += 1f;
                 bulletDirection = new Vector2(1, 0);
+                spriteRenderer.flipX = false;
             }
         }
 
@@ -141,6 +152,7 @@ public class Monster : MonoBehaviour
             if (Input.GetKey(KeyCode.F))
             {
                 MonsterDefaultAttack();
+              
             }
             else if (Input.GetKey(KeyCode.G))
             {
@@ -152,6 +164,7 @@ public class Monster : MonoBehaviour
             if (Input.GetKey(KeyCode.K))
             {
                 MonsterDefaultAttack();
+                
             }
             else if (Input.GetKey(KeyCode.L))
             {
@@ -176,6 +189,7 @@ public class Monster : MonoBehaviour
         if (_IsSoul == _isSoul.PlayerOne || _IsSoul == _isSoul.PlayerTwo)
         {
             GameObject soul = Instantiate(_PlayerSoul, transform.position, Quaternion.identity);
+            soul.GetComponent<SpriteRenderer>().sprite = _IsSoul == _isSoul.PlayerOne ? _SoulSprits[0] : _SoulSprits[1];
             Destroy(gameObject);
         }
         else
@@ -190,13 +204,27 @@ public class Monster : MonoBehaviour
 
     public void takeDamage(float argDmg)
     {
+        if (stats._Hp <= 0) return;
         stats._Hp -= argDmg;
         //Debug.Log(stats._Hp);
 
         if(stats._Hp <= 0)
         {
-            MonsterDie();
+            animator.SetBool("Death",true);
+            //MonsterDie();
         }
+        else
+        {
+            StartCoroutine(HitHighlight());
+        }
+        
+    }
+
+    private IEnumerator HitHighlight()
+    {
+        GetComponent<SpriteRenderer>().color = Color.red;
+        yield return new WaitForSeconds(0.1f);
+        GetComponent<SpriteRenderer>().color = Color.white;
     }
 
     private void pushSoul()
@@ -217,6 +245,7 @@ public class Monster : MonoBehaviour
     {
         stats._Hp = stats._MaxHp;
         GetComponent<BoxCollider2D>().isTrigger = false;
+        animator.SetBool("Death", false);
     }
 
     private void OnTriggerEnter2D(Collider2D collision)
@@ -228,7 +257,7 @@ public class Monster : MonoBehaviour
 
         if(collision.GetComponent<Monster>()) 
         {
-            if(collision.GetComponent<Monster>()._IsSoul == _isSoul.Death)
+            if(collision.GetComponent<Monster>()._IsSoul == _isSoul.Death && _HaveSoul)
                 _StayObj = collision.gameObject;
         }
 
