@@ -41,7 +41,7 @@ public class MoveMapCam : MonoBehaviour
     }
 
 
-    private void MoveTriggerinstantiate()
+    public void MoveTriggerinstantiate()
     {
 
         // 만약에 플레이어가 한 명이라도 여기로 왔다면 으로 가정
