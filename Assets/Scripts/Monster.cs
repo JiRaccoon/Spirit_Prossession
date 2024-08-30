@@ -16,6 +16,8 @@ public class Monster : MonoBehaviour
     private Sprite[] _SoulSprits;
     [SerializeField]
     protected GameObject _StayObj;
+    [SerializeField]
+    private GameObject _HpPoint;
 
     [SerializeField]
     protected _isSoul _IsSoul;
@@ -228,6 +230,14 @@ public class Monster : MonoBehaviour
         stats._Hp -= argDmg;
         //Debug.Log(stats._Hp);
 
+        if(_IsSoul!=_isSoul.NULL)
+        {
+            if(transform.GetChild(2).childCount > 0)
+            {
+                StartCoroutine(HPLight());
+            }
+        }
+
         if(stats._Hp <= 0)
         {
             animator.SetBool("Death",true);
@@ -238,6 +248,13 @@ public class Monster : MonoBehaviour
             StartCoroutine(HitHighlight());
         }
         
+    }
+    private IEnumerator HPLight()
+    {
+        transform.GetChild(2).gameObject.SetActive(true);
+        Destroy(transform.GetChild(2).GetChild(0).gameObject);
+        yield return new WaitForSeconds(0.3f);
+        transform.GetChild(2).gameObject.SetActive(false);
     }
 
     public bool checkAi()
@@ -280,6 +297,13 @@ public class Monster : MonoBehaviour
         grid._Player_transform[pNum] = gameObject;
         transform.GetChild(pNum).gameObject.SetActive(true);
         gameObject.tag = "Player";
+
+        for (int i = 0; i < stats._MaxHp + 1; i++)
+        {
+            Instantiate(_HpPoint);
+        }
+        
+        StartCoroutine(HPLight());
     }
 
     private void OnTriggerEnter2D(Collider2D collision)
