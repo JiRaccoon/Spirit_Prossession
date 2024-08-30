@@ -5,13 +5,17 @@ using UnityEngine;
 public class MapManager : MonoBehaviour
 {
     MonsterManager monsterManager;
-    MoveMapCam moveMapCam;
+    private MoveMapCam moveMapCam;
     grid_tistory grid_Tistory;
 
     bool isWaveOver;
     int highTileMap = 0;
     int nowTileMap = 0;
 
+    private void Start()
+    {
+        moveMapCam = GetComponent<MoveMapCam>();
+    }
 
     private void Update()
     {
@@ -27,5 +31,21 @@ public class MapManager : MonoBehaviour
         }
 
         nowTileMap = grid_Tistory.tileMapNumber;
+    }
+
+    public void MoveMap(int type)
+    {
+        StartCoroutine(moveMapCam.CameraMove(type));
+    }
+
+    void MapReturnCheck()
+    {
+        bool check;
+        check = monsterManager.GetIsMonsterAllDie();
+
+        if(check)
+        {
+            moveMapCam.MoveTriggerinstantiate();
+        }
     }
 }

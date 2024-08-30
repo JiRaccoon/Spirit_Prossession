@@ -2056,71 +2056,6 @@ Transform:
   - {fileID: 4183727636617735183}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!1 &1275127308
-GameObject:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  serializedVersion: 6
-  m_Component:
-  - component: {fileID: 1275127310}
-  - component: {fileID: 1275127311}
-  - component: {fileID: 1275127309}
-  m_Layer: 0
-  m_Name: MapManager
-  m_TagString: Untagged
-  m_Icon: {fileID: 0}
-  m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
-  m_IsActive: 1
---- !u!114 &1275127309
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1275127308}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 5e2f4db4e1bf28a429e0cbd797df681b, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  _cam: {fileID: 519420031}
-  _moveobjL: {fileID: 1041897709800948690}
-  _moveobjR: {fileID: 1041897708300830619}
-  _check: 0
---- !u!4 &1275127310
-Transform:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1275127308}
-  serializedVersion: 2
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 9.082593, y: 0.3762635, z: 0.020141292}
-  m_LocalScale: {x: 1, y: 1, z: 1}
-  m_ConstrainProportionsScale: 0
-  m_Children: []
-  m_Father: {fileID: 0}
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &1275127311
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1275127308}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: e0c039297860cd141b3d4478f3e06a5a, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  Tilemap:
-  - {fileID: 131616564}
-  - {fileID: 1344666497}
-  tileMapNumber: 0
 --- !u!1 &1344666494
 GameObject:
   m_ObjectHideFlags: 0
@@ -3587,6 +3522,8 @@ GameObject:
   m_Component:
   - component: {fileID: 1348008457}
   - component: {fileID: 1348008456}
+  - component: {fileID: 1348008459}
+  - component: {fileID: 1348008458}
   m_Layer: 0
   m_Name: MapManager
   m_TagString: Untagged
@@ -3621,6 +3558,37 @@ Transform:
   m_Children: []
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &1348008458
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1348008455}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 5e2f4db4e1bf28a429e0cbd797df681b, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _cam: {fileID: 519420031}
+  _moveobjL: {fileID: 1041897709800948690}
+  _moveobjR: {fileID: 1041897708300830619}
+--- !u!114 &1348008459
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1348008455}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: e0c039297860cd141b3d4478f3e06a5a, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  Tilemap:
+  - {fileID: 131616564}
+  - {fileID: 1344666497}
+  tileMapNumber: 0
 --- !u!1 &1409094029
 GameObject:
   m_ObjectHideFlags: 0
@@ -4080,7 +4048,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: e79d56b15eec6f7479750df4f7e1b0c3, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _mc: {fileID: 1275127309}
+  _mc: {fileID: 0}
   _tmpnum: 1
 --- !u!4 &4183727638453397574 stripped
 Transform:
@@ -4099,7 +4067,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: e79d56b15eec6f7479750df4f7e1b0c3, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _mc: {fileID: 1275127309}
+  _mc: {fileID: 0}
   _tmpnum: 0
 --- !u!1001 &4828087688960111745
 PrefabInstance:
@@ -4240,7 +4208,6 @@ SceneRoots:
   - {fileID: 519420032}
   - {fileID: 635879856}
   - {fileID: 1409094031}
-  - {fileID: 1275127310}
   - {fileID: 1117316544}
   - {fileID: 2027870253}
   - {fileID: 1348008457}

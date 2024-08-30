@@ -5,9 +5,13 @@ using UnityEngine;
 public class TriggerPoint : MonoBehaviour
 {
     public MoveMapCam _mc;
+    private MapManager _mg;
     public int _tmpnum = 0;
+    private grid_tistory _gt;
     void Start()
     {
+        _mg.GetComponent<MapManager>();
+        _gt.GetComponent<grid_tistory>();
         if (this.gameObject.name == "MovePoint_L") _tmpnum = 0;
         else if (this.gameObject.name == "MovePoint_R") _tmpnum = 1;
     }
@@ -17,14 +21,7 @@ public class TriggerPoint : MonoBehaviour
     {
         if(other.gameObject.CompareTag("Player"))
         {
-            Debug.Log(1);
-
-            if (!_mc._check)
-            {
-                Debug.Log(1);
-                _mc._check = true;
-                StartCoroutine(_mc.CameraMove(_tmpnum));
-            }
+            _mg.MoveMap(_tmpnum);
         }
     }
 }
