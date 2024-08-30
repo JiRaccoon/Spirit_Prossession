@@ -8,6 +8,7 @@ TagManager:
   - Right
   - Soul
   - Bullet
+  - MonsterManager
   layers:
   - Default
   - TransparentFX

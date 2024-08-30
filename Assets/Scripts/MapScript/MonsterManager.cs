@@ -12,6 +12,7 @@ public class MonsterManager : MonoBehaviour
     public int tileMapNumber = 0;
 
     public bool IsMonsterAllDie = false;
+    public int monsterCount =0;
 
     private void Start()
     {
@@ -20,6 +21,7 @@ public class MonsterManager : MonoBehaviour
 
     private void Update()
     {
+        monsterCount = aliveMonsters.Count;
         //얼라이브몬스터 비우기
         if (Input.GetKeyDown(KeyCode.Keypad0))
         { TestRemoveAll(); mapmanager.isWaveOver = true; }
@@ -59,6 +61,7 @@ public class MonsterManager : MonoBehaviour
 
     public void AddAliveMonster(GameObject monster)
     {
+        Debug.Log("생성");
         aliveMonsters.Add(monster);
     }
 
