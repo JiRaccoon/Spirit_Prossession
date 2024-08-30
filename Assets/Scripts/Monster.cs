@@ -38,6 +38,8 @@ public class Monster : MonoBehaviour
 
     protected float lastShootTime;
 
+    private Camera mainCamera;
+
 
     protected void Init(float[] argStats) 
     {
@@ -49,6 +51,8 @@ public class Monster : MonoBehaviour
         stats._ShotDelay = argStats[4];
         rb = GetComponent<Rigidbody2D>();
         animator = GetComponent<Animator>();
+
+        mainCamera = Camera.main;
     }
 
     private void Update()
@@ -141,7 +145,20 @@ public class Monster : MonoBehaviour
         moveDirection = new Vector2(moveX, moveY).normalized;
 
         // 이동 적용
-        rb.MovePosition(rb.position + moveDirection * stats._MoveSpeed * Time.deltaTime);
+        Vector2 newPosition = rb.position + moveDirection * stats._MoveSpeed * Time.deltaTime;
+
+        // 화면 경계 계산
+        float screenWidth = mainCamera.orthographicSize * mainCamera.aspect;
+        float screenHeight = mainCamera.orthographicSize;
+
+        // 화면 경계 내로 위치 제한
+        newPosition.x = Mathf.Clamp(newPosition.x, -screenWidth, screenWidth);
+        newPosition.y = Mathf.Clamp(newPosition.y, -screenHeight, screenHeight);
+
+        rb.MovePosition(newPosition);
+
+        // 이동 적용
+        //rb.MovePosition(rb.position + moveDirection * stats._MoveSpeed * Time.deltaTime);
     }
 
 
