@@ -1,5 +1,6 @@
 using System.Collections;
 using System.Collections.Generic;
+using System.ComponentModel;
 using UnityEngine;
 
 public class MapManager : MonoBehaviour
@@ -8,12 +9,13 @@ public class MapManager : MonoBehaviour
     private MoveMapCam moveMapCam;
     private grid_tistory grid_Tistory;
 
-    bool isWaveOver;
+    public bool isWaveOver;
     int highTileMap = -1;
     int nowTileMap = 0;
-
+    bool mapcheck = false;
     private void Start()
     {
+        isWaveOver = false;
         moveMapCam = GetComponent<MoveMapCam>();
         grid_Tistory = GetComponent<grid_tistory>();
     }
@@ -21,6 +23,7 @@ public class MapManager : MonoBehaviour
     private void Update()
     {
         UpdateTileMap();
+        MapCheck();
     }
 
     void UpdateTileMap()
@@ -30,8 +33,20 @@ public class MapManager : MonoBehaviour
             highTileMap = grid_Tistory.tileMapNumber;
             monsterManager.ActiveWaveSpawn();
         }
-
+        
         nowTileMap = grid_Tistory.tileMapNumber;
+    }
+
+    void MapCheck()
+    {
+        if (highTileMap < grid_Tistory.tileMapNumber)
+        {
+            return;
+        }
+        else
+        {
+            if(isWaveOver == true) MapReturnCheck();
+        }
     }
 
     public void MoveMap(int type)
@@ -41,13 +56,7 @@ public class MapManager : MonoBehaviour
 
     void MapReturnCheck()
     {
-        bool check;
-        check = monsterManager.GetIsMonsterAllDie();
-
-        if(check)
-        {
-            Debug.Log(1);
-            moveMapCam.MoveTriggerinstantiate();
-        }
+        moveMapCam.MoveTriggerinstantiate();
+        
     }
 }

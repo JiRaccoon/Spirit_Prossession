@@ -7,6 +7,7 @@ public class MonsterManager : MonoBehaviour
 {
     List<GameObject> aliveMonsters;
     public List<GameObject> waveSpawnParent; //웨이브 타일 패런트를 다 넣어야함
+    public MapManager mapmanager;
 
     public int tileMapNumber = 0;
 
@@ -20,8 +21,8 @@ public class MonsterManager : MonoBehaviour
     private void Update()
     {
         //얼라이브몬스터 비우기
-        if(Input.GetKeyDown(KeyCode.Keypad0))
-            TestRemoveAll();
+        if (Input.GetKeyDown(KeyCode.Keypad0))
+        { TestRemoveAll(); mapmanager.isWaveOver = true; }
 
         if (Input.GetMouseButtonDown(0))
         {

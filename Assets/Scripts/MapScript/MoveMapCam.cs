@@ -7,6 +7,8 @@ public class MoveMapCam : MonoBehaviour
     [SerializeField] private Camera _cam;
     [SerializeField] private GameObject _moveobjL;
     [SerializeField] private GameObject _moveobjR;
+    private MapManager _mm;
+
     private grid_tistory _gt;
     public bool _check = false;
     private int _tmp;
@@ -14,6 +16,7 @@ public class MoveMapCam : MonoBehaviour
     private void Start()
     {
         _gt = GetComponent<grid_tistory>();
+        _mm = GetComponent<MapManager>();
     }
 
     private void Update()
@@ -43,7 +46,10 @@ public class MoveMapCam : MonoBehaviour
 
     public void MoveTriggerinstantiate()
     {
+        if (_moveobjL.gameObject.activeSelf) return;
+        if (_moveobjR.gameObject.activeSelf) return;
 
+        Debug.Log(111);
         // 만약에 플레이어가 한 명이라도 여기로 왔다면 으로 가정
         if (_gt.tileMapNumber == 0)
         {
@@ -129,5 +135,6 @@ public class MoveMapCam : MonoBehaviour
         _moveobjL.gameObject.SetActive(false);
         _moveobjR.gameObject.SetActive(false);
         _check = false;
+
     }
 }
