@@ -85,11 +85,30 @@ public class AcherGoblin : Monster
         {
             transform.GetChild(3).GetComponent<SpriteRenderer>().flipX = transform.GetComponent<SpriteRenderer>().flipX;
             _object.GetComponent<Rigidbody2D>().AddForce(bulletDirection * stats._BulletSpeed, ForceMode2D.Force);
+            StartCoroutine(arrowRota(_object));
         }
 
         _object.GetComponent<ArrowShot>().Dmg = stats._Atk; //총알에 공격력
         _object.GetComponent<ArrowShot>().MyObj = gameObject.name; //총알이 자기자신안떄리게
 
+    }
+    private IEnumerator arrowRota(GameObject obj)
+    {
+        Vector2 lastPostion = obj.transform.position;
+        yield return new WaitForSeconds(0.2f);
+        obj.GetComponent<CircleCollider2D>().isTrigger = false;
+        if(lastPostion.x > obj.transform.position.x)
+        {
+            obj.transform.rotation = Quaternion.Euler(0, 0, 180);
+        }
+        else if(lastPostion.y > obj.transform.position.y)
+        {
+            obj.transform.rotation = Quaternion.Euler(0, 0, -90);
+        }
+        else
+        {
+            obj.transform.rotation = Quaternion.Euler(0, 0, 90);
+        }
     }
     protected override void MonsterSpecialAttack() //몬스터 rain player dash
     {
