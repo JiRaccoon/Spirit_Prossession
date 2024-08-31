@@ -151,14 +151,12 @@ public class Monster : MonoBehaviour
         // 이동 적용
         Vector2 newPosition = rb.position + moveDirection * stats._MoveSpeed * Time.deltaTime;
 
-        // 화면 경계 계산
-        float screenWidth = mainCamera.orthographicSize * mainCamera.aspect;
-        float screenHeight = mainCamera.orthographicSize;
-
-        // 화면 경계 내로 위치 제한
-        newPosition.x = Mathf.Clamp(newPosition.x, -screenWidth, screenWidth);
-        newPosition.y = Mathf.Clamp(newPosition.y, -screenHeight, screenHeight);
-
+        Vector3 pos = mainCamera.WorldToViewportPoint(transform.position);
+        if (pos.x < 0f) pos.x = 0f;
+        if (pos.x > 1f) pos.x = 1f;
+        if (pos.y < 0f) pos.y = 0f;
+        if (pos.y > 1f) pos.y = 1f;
+        transform.position = mainCamera.ViewportToWorldPoint(pos);
         rb.MovePosition(newPosition);
 
         // 이동 적용
