@@ -43,36 +43,43 @@ public class DevilSlime : Monster
         // Slime's Attack
         lastShootTime = Time.time;
         if (_StayObj != null) return;
-        animator.SetTrigger("Attack"); //애니메이션 공격은 어택 죽음은 데스로 통일
+        //애니메이션 공격은 어택 죽음은 데스로 통일
         GameObject _object = null;
 
         if (attactType == 0)
         {
+            float randomAngle = Random.Range(0f, 360f);
+            Vector2 dir = new Vector2(Mathf.Cos(randomAngle * Mathf.Deg2Rad), Mathf.Sin(randomAngle * Mathf.Deg2Rad));
             _object = Instantiate(Bullet, transform.position, Quaternion.identity); //총알소환
+            _object.GetComponent<Rigidbody2D>().AddForce(dir * stats._BulletSpeed, ForceMode2D.Force);
+            _object.GetComponent<Bullet>().Dmg = stats._Atk; //총알에 공격력
+            _object.GetComponent<Bullet>().MyObj = gameObject.name; //총알이 자기자신안떄리게
             //탄막
             bulletCount++;
         }
         else if (attactType == 1)
         {
             // 슬라임 소환
-            GameObject _slime = Instantiate(Slimes[Random.Range(0, SlimeStat.Length-1)]);
+            float x = Random.Range(SkillRange.bounds.min.x, SkillRange.bounds.max.x);
+            float y = Random.Range(SkillRange.bounds.min.y, SkillRange.bounds.max.y);
+            Vector3 spawnPosition = new Vector3(x, y, 0);
+            GameObject _slime = Instantiate(Slimes[Random.Range(0, Slimes.Length)], spawnPosition , Quaternion.identity);
             bulletCount++;
 
         }
         else if ( attactType == 2)
         {
+            animator.SetTrigger("Attack");
             // 불기둥
             float x = Random.Range(SkillRange.bounds.min.x, SkillRange.bounds.max.x);
             float y = Random.Range(SkillRange.bounds.min.y, SkillRange.bounds.max.y);
             Vector3 spawnPosition = new Vector3(x, y, 0);
             Instantiate(FirePillarPrefab, spawnPosition, Quaternion.identity);
             bulletCount++;
-            attactType = 0;
         }
 
 
-        _object.GetComponent<Bullet>().Dmg = stats._Atk; //총알에 공격력
-        _object.GetComponent<Bullet>().MyObj = gameObject.name; //총알이 자기자신안떄리게
+
 
 
     }
@@ -88,9 +95,11 @@ public class DevilSlime : Monster
                 bulletCount = 0;
                 yield return new WaitForSeconds(nextAttackDelay);
                 StartCoroutine(SpawnSlime());
+                break;
+
             }
-            
         }
+        
     }
 
     public IEnumerator SpawnSlime() 
@@ -98,13 +107,14 @@ public class DevilSlime : Monster
         while (_IsSoul == _isSoul.NULL)
         {
             MonsterDefaultAttack();
-            yield return new WaitForSeconds(1); //몬스터는 플레이어보다 딜레이좀더느림 원하는데로 조정
-            if (bulletCount <= 15)
+            yield return new WaitForSeconds(0.8f); //몬스터는 플레이어보다 딜레이좀더느림 원하는데로 조정
+            if (bulletCount >= 5)
             {
                 attactType = 2;
                 bulletCount = 0;
                 yield return new WaitForSeconds(nextAttackDelay);
                 StartCoroutine(SpawnFire());
+                break;
             }
 
         }
@@ -116,11 +126,13 @@ public class DevilSlime : Monster
         {
             MonsterDefaultAttack();
             yield return new WaitForSeconds(0.6f); //몬스터는 플레이어보다 딜레이좀더느림 원하는데로 조정
-            if (bulletCount <= 15)
+            if (bulletCount >= 15)
             {
                 attactType = 0;
                 bulletCount = 0;
                 yield return new WaitForSeconds(nextAttackDelay);
+                StartCoroutine(AutoShot());
+                break;
 
             }
 

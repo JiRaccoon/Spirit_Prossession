@@ -19,6 +19,7 @@ public class Bullet : MonoBehaviour
 
     private void OnTriggerEnter2D(Collider2D collision)
     {
+        if (collision.tag == "Box") return;
         if (collision.transform.GetComponent<BreakTile>() != null)
         {
             int offset = 0;
@@ -30,13 +31,19 @@ public class Bullet : MonoBehaviour
 
 
         if (_MyObj == collision.name) return;
-        if (collision.tag == "Soul" || collision.tag == "Bullet" || collision.gameObject.GetComponent<BoxCollider2D>().isTrigger)
+        if (collision.tag == "Soul" || collision.tag == "Bullet")
             return;
-               
+
+
+        
 
         if (collision.gameObject.GetComponent<Monster>())
         collision.gameObject.GetComponent<Monster>().takeDamage(_Dmg);
 
+        if (collision.gameObject.GetComponent<Monster>() && collision.gameObject.GetComponent<Monster>().CheckDie())
+        {
+            return;
+        }
         Destroy(gameObject);
     }
 }

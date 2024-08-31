@@ -9,6 +9,7 @@ TagManager:
   - Soul
   - Bullet
   - MonsterManager
+  - Box
   layers:
   - Default
   - TransparentFX
