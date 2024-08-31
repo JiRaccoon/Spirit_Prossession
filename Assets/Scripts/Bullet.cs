@@ -10,12 +10,22 @@ public class Bullet : MonoBehaviour
     private string _MyObj;
     public string MyObj {  get { return _MyObj; } set {  _MyObj = value; } }
 
+    Rigidbody2D _Rigidbody2D;
+
+    private void Start()
+    {
+        _Rigidbody2D = GetComponent<Rigidbody2D>();
+    }
+
     private void OnTriggerEnter2D(Collider2D collision)
     {
         if (collision.transform.GetComponent<BreakTile>() != null)
         {
+            int offset = 0;
+            if (_Rigidbody2D.velocity.x < 0) offset = -1;
+            else if(_Rigidbody2D.velocity.x > 0) offset = 1;
             Vector2 closestPoint = collision.ClosestPoint(transform.position);
-            collision.transform.GetComponent<BreakTile>().MakeDot(closestPoint);
+            collision.transform.GetComponent<BreakTile>().MakeDot(closestPoint + new Vector2(offset,0));
         }
 
 

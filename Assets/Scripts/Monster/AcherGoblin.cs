@@ -76,14 +76,14 @@ public class AcherGoblin : Monster
                     _object.transform.rotation = Quaternion.Euler(0, 0, -90);
                 }
             }
-            transform.GetChild(2).GetComponent<SpriteRenderer>().flipX = transform.GetComponent<SpriteRenderer>().flipX;
+            transform.GetChild(3).GetComponent<SpriteRenderer>().flipX = transform.GetComponent<SpriteRenderer>().flipX;
 
             _object.GetComponent<Rigidbody2D>().AddForce(dir * stats._BulletSpeed, ForceMode2D.Force);
 
         }
         else //에이아이 아닐떄
         {
-            transform.GetChild(2).GetComponent<SpriteRenderer>().flipX = transform.GetComponent<SpriteRenderer>().flipX;
+            transform.GetChild(3).GetComponent<SpriteRenderer>().flipX = transform.GetComponent<SpriteRenderer>().flipX;
             _object.GetComponent<Rigidbody2D>().AddForce(bulletDirection * stats._BulletSpeed, ForceMode2D.Force);
         }
 
@@ -107,8 +107,17 @@ public class AcherGoblin : Monster
             _object.GetComponent<ArrowShot>().Dmg = stats._Atk; //총알에 공격력
             _object.GetComponent<ArrowShot>().MyObj = gameObject.name; //총알이 자기자신안떄리게
         }
-        
+        else
+        {
+            StartCoroutine(SpeedUP());
+        }
 
+    }
+    private IEnumerator SpeedUP()
+    {
+        stats._MoveSpeed = stats._MoveSpeed * 3;
+        yield return new WaitForSeconds(1f);
+        stats._MoveSpeed = stats._MoveSpeed / 3;
     }
     public IEnumerator AutoShot() //자동공격
     {
