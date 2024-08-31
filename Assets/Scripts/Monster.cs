@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using System.Security.Cryptography;
+using Unity.VisualScripting;
 using Unity.VisualScripting.Antlr3.Runtime.Misc;
 using UnityEngine;
 using UnityEngine.EventSystems;
@@ -302,6 +303,13 @@ public class Monster : MonoBehaviour
         }
 
         StartCoroutine(HPLight());
+    }
+
+    public bool CheckDie()
+    {
+        if (_IsSoul == _isSoul.Death)
+            return true;
+        return false;
     }
 
     private void OnTriggerEnter2D(Collider2D collision)
