@@ -10,23 +10,29 @@ public class Goblin : Monster
     [SerializeField]
     private GameObject GoblinAttackCall;
 
-    
+    [SerializeField]
+    private GameObject GoblinAttackCallL;
+
+    bool isAttack = false;
+
     private void Awake()
     {
         base.Init(GoblinStat);
     }
 
-
+    SpriteRenderer spriteRenderer;
 
 
     void Start()
     {
+        //SpriteRenderer spriteRenderer = GetComponent<SpriteRenderer>();
         animator.SetBool("isWalkBool", true);
         if (_IsSoul == _isSoul.NULL) //눌 이란 에이아이일때
         {
 
             StartCoroutine(AutoShot());
         }
+        StartCoroutine(MyUpdate());
     }
 
     protected override void MonsterDefaultAttack()
@@ -38,7 +44,7 @@ public class Goblin : Monster
         //animator.SetBool("isWalkBool", false);
         lastShootTime = Time.time;
 
-        Debug.Log("들어옴"+GoblinAttackCall.GetComponent<BoxCollider2D>().enabled);
+        
         if (_StayObj != null)
             return;
 
@@ -48,34 +54,74 @@ public class Goblin : Monster
         if (_IsSoul == _isSoul.NULL) //에이아이일때
         {
             //4방향으로 위치잡아서 쏘는거
-            
+
             if (Mathf.Abs(GetComponent<Rigidbody2D>().velocity.x) > Mathf.Abs(GetComponent<Rigidbody2D>().velocity.y))
             {
                 if (GetComponent<Rigidbody2D>().velocity.x < 0)
                 {
-                    
+                    Debug.Log("들어옴1");
+                    CallGoblinAttackOnEnable(true);
                     transform.rotation = Quaternion.Euler(0, 180, 0);
                 }
                 else
                 {
-                    
+                    CallGoblinAttackOnEnable(false);
                     transform.rotation = Quaternion.Euler(0, 0, 0);
                 }
             }
 
         }
+        else
+        {
 
+            //if (Input.GetKey(KeyCode.A) || Input.GetKey(KeyCode.LeftArrow))
+            //{
+            //    Debug.Log("A");
+            //    isAttack = true;
+            //    CallGoblinAttackOnEnable(isAttack);
+            //}
+            //if (Input.GetKey(KeyCode.D) || Input.GetKey(KeyCode.RightArrow))
+            //{
+            //    Debug.Log("B");
+            //    isAttack = false;
+            //    CallGoblinAttackOnEnable(isAttack);
+            //}
+        }
 
-        GoblinAttackCall.GetComponent<BoxCollider2D>().enabled = true;
-        Debug.Log("나감"+GoblinAttackCall.GetComponent<BoxCollider2D>().enabled);
+        //GoblinAttackCall.GetComponent<BoxCollider2D>().enabled = true;
+        //Debug.Log("나감"+GoblinAttackCall.GetComponent<BoxCollider2D>().enabled);
+
+        CallGoblinAttackOnEnable(isAttack);
 
         GoblinAttackCall.GetComponent<MeleeAttack>().Dmg = stats._Atk;
         GoblinAttackCall.GetComponent<MeleeAttack>().MyObj = gameObject.name;
-        
-        if(!DeathCheck())
+
+        GoblinAttackCallL.GetComponent<MeleeAttack>().Dmg = stats._Atk;
+        GoblinAttackCallL.GetComponent<MeleeAttack>().MyObj = gameObject.name;
+
+        if (!DeathCheck())
             animator.SetBool("isWalkBool", true);
     }
 
+    IEnumerator MyUpdate()
+    {
+        while(true)
+        {
+            if (Input.GetKey(KeyCode.A) || Input.GetKey(KeyCode.LeftArrow))
+            {
+                Debug.Log("A");
+                isAttack = true;
+                //CallGoblinAttackOnEnable(isAttack);
+            }
+            if (Input.GetKey(KeyCode.D) || Input.GetKey(KeyCode.RightArrow))
+            {
+                Debug.Log("B");
+                isAttack = false;
+                //CallGoblinAttackOnEnable(isAttack);
+            }
+            yield return null;
+        }
+    }
     bool DeathCheck()
     {
         return _IsSoul == _isSoul.Death;
@@ -97,14 +143,20 @@ public class Goblin : Monster
         }
     }
 
-    public void CallGoblinAttackOnEnable()
+    public void CallGoblinAttackOnEnable(bool a)
     {
-        GoblinAttackCall.GetComponent<BoxCollider2D>().enabled = true;
+        if (a)
+            GoblinAttackCallL.GetComponent<BoxCollider2D>().enabled = true;
+        else if(!a)
+            GoblinAttackCall.GetComponent<BoxCollider2D>().enabled = true;
     }
 
     public void CallGoblinAttackUnEnable()
     {
-        GoblinAttackCall.GetComponent<BoxCollider2D>().enabled = false;
+        
+            GoblinAttackCallL.GetComponent<BoxCollider2D>().enabled = false;
+        
+            GoblinAttackCall.GetComponent<BoxCollider2D>().enabled = false;
     }
 
     
