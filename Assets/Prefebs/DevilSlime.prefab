@@ -209,7 +209,7 @@ MonoBehaviour:
   - 0
   - 150
   - 0.2
-  Bullet: {fileID: 4326062618156378219, guid: 34787fe1890acd549aed9d7f3852093d, type: 3}
+  Bullet: {fileID: 4326062618156378219, guid: ca7309d5db9c9b34cb9d1a4ac62fdd59, type: 3}
   Slimes:
   - {fileID: 8285911974114305580, guid: e04baa346da44244ebbd37cc07857477, type: 3}
   - {fileID: 8285911974114305580, guid: 483204cd1128faa458b6a8d36ee69e93, type: 3}

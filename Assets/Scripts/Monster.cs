@@ -217,9 +217,11 @@ public class Monster : MonoBehaviour
         else
         { 
             transform.GetComponent<BoxCollider2D>().isTrigger = true;
-            GetComponent<PathFinding>().moveSpeed = 0; 
+            GetComponent<PathFinding>().moveSpeed = 0;
+            GameObject.FindGameObjectWithTag("MonsterManager").GetComponent<MonsterManager>().RemoveMonster(this.gameObject);
         }
 
+        rb.constraints = RigidbodyConstraints2D.FreezePosition;
         _IsSoul = _isSoul.Death;
     }
 
@@ -274,6 +276,7 @@ public class Monster : MonoBehaviour
 
         if (Input.GetKey(KeyCode.F) || Input.GetKey(KeyCode.K))
         {
+            _HaveSoul = false;
             _StayObj.tag = "Player";
             _StayObj.GetComponent<Monster>()._IsSoul = _IsSoul == _isSoul.PlayerOne ? _isSoul.PlayerTwo : _isSoul.PlayerOne;
             _StayObj.name = _IsSoul == _isSoul.PlayerOne ? "PlayerTwo" : "PlayerOne";
@@ -301,7 +304,8 @@ public class Monster : MonoBehaviour
         {
             Instantiate(_HpPoint,transform.GetChild(2));
         }
-
+        rb.constraints = RigidbodyConstraints2D.None;
+        rb.constraints = RigidbodyConstraints2D.FreezeRotation;
         StartCoroutine(HPLight());
     }
 
@@ -314,7 +318,7 @@ public class Monster : MonoBehaviour
 
     private void OnTriggerEnter2D(Collider2D collision)
     {
-        if(collision.tag == "Soul" && _IsSoul != _isSoul.NULL) {
+        if(collision.tag == "Soul" && _IsSoul != _isSoul.NULL && _IsSoul != _isSoul.Death) {
             Destroy(collision.gameObject);
             _HaveSoul = true;
         }

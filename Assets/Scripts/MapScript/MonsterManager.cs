@@ -8,6 +8,8 @@ public class MonsterManager : MonoBehaviour
     List<GameObject> aliveMonsters;
     public List<GameObject> waveSpawnParent; //웨이브 타일 패런트를 다 넣어야함
     public MapManager mapmanager;
+    public GameObject Astar;
+    public GameObject astar;
 
     public int tileMapNumber = 0;
 
@@ -17,6 +19,7 @@ public class MonsterManager : MonoBehaviour
     private void Start()
     {
         aliveMonsters = new List<GameObject>();
+        Application.targetFrameRate = 60;
     }
 
     private void Update()
@@ -26,10 +29,6 @@ public class MonsterManager : MonoBehaviour
         if (Input.GetKeyDown(KeyCode.Keypad0))
         { TestRemoveAll(); mapmanager.isWaveOver = true; }
 
-        if (Input.GetMouseButtonDown(0))
-        {
-            ActiveWaveSpawn();
-        }
     }
 
     //타일맵에 맞는 몬스터 스폰 액티브
@@ -37,6 +36,12 @@ public class MonsterManager : MonoBehaviour
     {
         IsMonsterAllDie = false;
 
+        if (astar != null)
+        {
+            Destroy(astar);
+        }
+        astar = Instantiate(Astar, Camera.main.transform.position,Quaternion.identity);
+        astar.name = "Astar";
         if (null == waveSpawnParent[tileMapNumber])
         {
             Debug.LogError("MonsterManager::ActiveWaveSpawn()["+ tileMapNumber +"번째 waveSpanwnParent is Null");
@@ -83,6 +88,7 @@ public class MonsterManager : MonoBehaviour
         if (aliveMonsters.Count == 0)
         {
             IsMonsterAllDie = true;
+            mapmanager.isWaveOver = true;
         }
         else
         {

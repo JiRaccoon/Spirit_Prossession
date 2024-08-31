@@ -24,6 +24,7 @@ using UnityEngine.EventSystems;
 using System.Collections.Generic;
 using System.Linq;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 
 public class PathFinding : MonoBehaviour
 {
@@ -74,6 +75,11 @@ public class PathFinding : MonoBehaviour
 
     private void LangeTarget(GameObject[] gobj)
     {
+        if(gobj[0] == null && gobj[1] == null)
+        {
+            SceneManager.LoadScene(2);
+        }
+
         if (gobj[0] == null)
         {
             target = gobj[1];

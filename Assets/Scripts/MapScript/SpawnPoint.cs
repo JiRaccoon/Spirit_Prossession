@@ -15,6 +15,7 @@ public class SpawnPoint : MonoBehaviour
     IEnumerator instant(float spawnTime, GameObject monster)
     {
         GameObject _monster = Instantiate(monster, transform);
+        _monster.name = "monster";
         GameObject.FindWithTag("MonsterManager").GetComponent<MonsterManager>().AddAliveMonster(_monster);
         _monster.SetActive(false);
         yield return new WaitForSeconds(spawnTime);

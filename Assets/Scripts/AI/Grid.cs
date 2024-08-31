@@ -27,6 +27,7 @@ public class Grid : MonoBehaviour
         nodeDiameter = nodeRadius * 2;
         gridSizeX = Mathf.RoundToInt(gridWorldSize.x / nodeDiameter);
         gridSizeY = Mathf.RoundToInt(gridWorldSize.y / nodeDiameter);
+        _Player_transform = GameObject.FindGameObjectsWithTag("Player");
         // 격자 생성
         CreateGrid();
     }
@@ -35,7 +36,9 @@ public class Grid : MonoBehaviour
     [SerializeField]
     public List<Node> path;
 
-    // Scene view 출력용 기즈모.
+    /*
+//#if UNITY_EDITOR
+    //Scene view 출력용 기즈모.
     private void OnDrawGizmos()
     {
         Gizmos.DrawWireCube(transform.position, new Vector2(gridWorldSize.x, gridWorldSize.y));
@@ -60,7 +63,8 @@ public class Grid : MonoBehaviour
             }
         }
     }
-
+//#endif
+*/
     // 격자 생성 함수
     void CreateGrid()
     {
