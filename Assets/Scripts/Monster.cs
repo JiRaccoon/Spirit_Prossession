@@ -298,11 +298,13 @@ public class Monster : MonoBehaviour
         transform.GetChild(pNum).gameObject.SetActive(true);
         gameObject.tag = "Player";
 
+        transform.GetChild(2).gameObject.SetActive(true);
         for (int i = 0; i < stats._MaxHp + 1; i++)
         {
-            Instantiate(_HpPoint);
+            Instantiate(_HpPoint,transform.GetChild(2));
         }
-        
+        transform.GetChild(2).gameObject.SetActive(false);
+
         StartCoroutine(HPLight());
     }
 

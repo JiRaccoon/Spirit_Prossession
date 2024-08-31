@@ -304,8 +304,9 @@ MonoBehaviour:
   - {fileID: 1907436628, guid: 782501f34bbfad7489c5dbf8bae20189, type: 3}
   - {fileID: -2030272585, guid: 782501f34bbfad7489c5dbf8bae20189, type: 3}
   _StayObj: {fileID: 0}
-  _HpPoint: {fileID: 0}
+  _HpPoint: {fileID: 4198874472213128300, guid: 44a316a7440fc1f4ab1b3f24619ed9d9, type: 3}
   _IsSoul: 3
+  _Ddir: {x: 0, y: 0}
   GoblinStat:
   - 7
   - 2

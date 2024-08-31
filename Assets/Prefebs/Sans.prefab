@@ -271,7 +271,7 @@ MonoBehaviour:
   - {fileID: -2142853517, guid: f716be925ff11334db7f519601615c02, type: 3}
   - {fileID: -2008130685, guid: f716be925ff11334db7f519601615c02, type: 3}
   _StayObj: {fileID: 0}
-  _HpPoint: {fileID: 0}
+  _HpPoint: {fileID: 4198874472213128300, guid: 44a316a7440fc1f4ab1b3f24619ed9d9, type: 3}
   _IsSoul: 3
   _Ddir: {x: 0, y: 1}
   SnasStat:

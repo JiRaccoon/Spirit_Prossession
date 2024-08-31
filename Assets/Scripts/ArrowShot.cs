@@ -27,7 +27,7 @@ public class ArrowShot : MonoBehaviour
         if (collision.gameObject.GetComponent<Monster>())
             collision.gameObject.GetComponent<Monster>().takeDamage(_Dmg);
 
-        if(collision.gameObject.tag!="Bullet")
+        if(collision.gameObject.tag!="Bullet" || !collision.gameObject.GetComponent<BoxCollider2D>().isTrigger)
             Destroyself();
     }
     private IEnumerator timedestroy()
