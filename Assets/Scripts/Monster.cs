@@ -294,9 +294,8 @@ public class Monster : MonoBehaviour
         stats._Hp = stats._MaxHp;
         GetComponent<BoxCollider2D>().isTrigger = false;
         animator.SetBool("Death", false);
-        Grid grid =GameObject.Find("Astar").GetComponent<Grid>();
         int pNum = _IsSoul == _isSoul.PlayerOne ? 0 : 1;
-        grid._Player_transform[pNum] = gameObject;
+        GetComponent<PathFinding>().grid._Player_transform[pNum] = gameObject;
         transform.GetChild(pNum).gameObject.SetActive(true);
         gameObject.tag = "Player";
 

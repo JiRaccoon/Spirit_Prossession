@@ -35,10 +35,12 @@ public class Bullet : MonoBehaviour
             return;
 
 
-        
+        Debug.Log(collision.name);
 
         if (collision.gameObject.GetComponent<Monster>())
-        collision.gameObject.GetComponent<Monster>().takeDamage(_Dmg);
+        {
+            collision.gameObject.GetComponent<Monster>().takeDamage(_Dmg);
+        }
 
         if (collision.gameObject.GetComponent<Monster>() && collision.gameObject.GetComponent<Monster>().CheckDie())
         {

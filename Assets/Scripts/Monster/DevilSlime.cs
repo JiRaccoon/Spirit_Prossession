@@ -27,6 +27,7 @@ public class DevilSlime : Monster
     void Awake()
     {
         base.Init(SlimeStat); //몬스터 스텟 5칸 체력,공격력,이동속도,총알속도,딜레이
+        
     }
     private void Start()
     {
@@ -34,6 +35,7 @@ public class DevilSlime : Monster
         {
             StartCoroutine(AutoShot());
         }
+        gameObject.name = "monster";
     }
 
     protected override void MonsterDefaultAttack() //몬스터 사격
@@ -107,8 +109,8 @@ public class DevilSlime : Monster
         while (_IsSoul == _isSoul.NULL)
         {
             MonsterDefaultAttack();
-            yield return new WaitForSeconds(0.8f); //몬스터는 플레이어보다 딜레이좀더느림 원하는데로 조정
-            if (bulletCount >= 5)
+            yield return new WaitForSeconds(0.7f); //몬스터는 플레이어보다 딜레이좀더느림 원하는데로 조정
+            if (bulletCount >= 7)
             {
                 attactType = 2;
                 bulletCount = 0;

@@ -15,6 +15,8 @@ public class Fire : MonoBehaviour
     private void OnTriggerEnter2D(Collider2D collision)
     {
         if (collision.gameObject.GetComponent<Monster>())
+        {
             collision.gameObject.GetComponent<Monster>().takeDamage(1);
+        }
     }
 }

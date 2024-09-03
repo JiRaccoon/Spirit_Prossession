@@ -31,7 +31,7 @@ public class PathFinding : MonoBehaviour
     [Header("Path Finding")]
     public GameObject target;
     // 맵을 격자로 분할한다.
-    Grid grid;
+    public Grid grid;
     // 남은거리를 넣을 큐 생성.
     public Queue<Vector2> wayQueue = new Queue<Vector2>();
 
@@ -69,16 +69,15 @@ public class PathFinding : MonoBehaviour
         {
             //this.target = this.grid._Player_transform[0];
             LangeTarget(grid._Player_transform);
-            this.StartFindPath((Vector2)this.transform.position, (Vector2)this.target.transform.position);
+            if (target != null)
+            {
+                this.StartFindPath((Vector2)this.transform.position, (Vector2)this.target.transform.position);
+            }
         } 
     }
 
     private void LangeTarget(GameObject[] gobj)
     {
-        if(gobj[0] == null && gobj[1] == null)
-        {
-            SceneManager.LoadScene(2);
-        }
 
         if (gobj[0] == null)
         {
