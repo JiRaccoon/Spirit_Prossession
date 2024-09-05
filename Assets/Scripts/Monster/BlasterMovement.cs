@@ -29,13 +29,15 @@ public class BlasterMovement : MonoBehaviour
         { // 플레이어1
             if (Input.GetKeyUp(KeyCode.F))
             {
-                _Sans.ChangeAttack();
+                if(_Sans != null)
+                    _Sans.ChangeAttack();
             }
         }
         else if (_Sans.SoulState == 2) {
             if (Input.GetKeyUp(KeyCode.K))
             {
-                _Sans.ChangeAttack();
+                if (_Sans != null)
+                    _Sans.ChangeAttack();
             }
         }
     }

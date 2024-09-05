@@ -34,7 +34,9 @@ public class BlueSlime : Monster
         if (_StayObj != null) return;
         animator.SetTrigger("Attack"); //애니메이션 공격은 어택 죽음은 데스로 통일
 
+        if (_IsSoul == _isSoul.Death) return;
         GameObject _object = Instantiate(Bullet, transform.position, Quaternion.identity); //총알소환
+
         if(_IsSoul == _isSoul.NULL) //에이아이일때
         {
             //4방향으로 위치잡아서 쏘는거

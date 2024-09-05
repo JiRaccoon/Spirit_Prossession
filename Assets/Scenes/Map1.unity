@@ -4648,6 +4648,10 @@ PrefabInstance:
       propertyPath: _IsSoul
       value: 2
       objectReference: {fileID: 0}
+    - target: {fileID: 5575593775854796601, guid: e04baa346da44244ebbd37cc07857477, type: 3}
+      propertyPath: SlimeStat.Array.data[0]
+      value: 3
+      objectReference: {fileID: 0}
     - target: {fileID: 6433506678479375641, guid: e04baa346da44244ebbd37cc07857477, type: 3}
       propertyPath: m_SizeDelta.x
       value: 0
@@ -4678,13 +4682,14 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 8285911974114305580, guid: e04baa346da44244ebbd37cc07857477, type: 3}
       propertyPath: m_Name
-      value: BlueSlime_origin (1)
+      value: PlayerTwo
       objectReference: {fileID: 0}
     - target: {fileID: 8285911974114305580, guid: e04baa346da44244ebbd37cc07857477, type: 3}
       propertyPath: m_TagString
       value: Player
       objectReference: {fileID: 0}
-    m_RemovedComponents: []
+    m_RemovedComponents:
+    - {fileID: -7910965004361879363, guid: e04baa346da44244ebbd37cc07857477, type: 3}
     m_RemovedGameObjects: []
     m_AddedGameObjects:
     - targetCorrespondingSourceObject: {fileID: 6433506678479375641, guid: e04baa346da44244ebbd37cc07857477, type: 3}
@@ -5212,6 +5217,75 @@ Transform:
   m_CorrespondingSourceObject: {fileID: 7865689515591233007, guid: b6ef8180bb93b99429281977055f0cf8, type: 3}
   m_PrefabInstance: {fileID: 1395896886}
   m_PrefabAsset: {fileID: 0}
+--- !u!1001 &220254833
+PrefabInstance:
+  m_ObjectHideFlags: 0
+  serializedVersion: 2
+  m_Modification:
+    serializedVersion: 3
+    m_TransformParent: {fileID: 0}
+    m_Modifications:
+    - target: {fileID: 4991717722713582326, guid: 69dff5bfa688d444e9450d8ea30820a7, type: 3}
+      propertyPath: m_LocalPosition.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4991717722713582326, guid: 69dff5bfa688d444e9450d8ea30820a7, type: 3}
+      propertyPath: m_LocalPosition.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4991717722713582326, guid: 69dff5bfa688d444e9450d8ea30820a7, type: 3}
+      propertyPath: m_LocalPosition.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4991717722713582326, guid: 69dff5bfa688d444e9450d8ea30820a7, type: 3}
+      propertyPath: m_LocalRotation.w
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 4991717722713582326, guid: 69dff5bfa688d444e9450d8ea30820a7, type: 3}
+      propertyPath: m_LocalRotation.x
+      value: -0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4991717722713582326, guid: 69dff5bfa688d444e9450d8ea30820a7, type: 3}
+      propertyPath: m_LocalRotation.y
+      value: -0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4991717722713582326, guid: 69dff5bfa688d444e9450d8ea30820a7, type: 3}
+      propertyPath: m_LocalRotation.z
+      value: -0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4991717722713582326, guid: 69dff5bfa688d444e9450d8ea30820a7, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4991717722713582326, guid: 69dff5bfa688d444e9450d8ea30820a7, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4991717722713582326, guid: 69dff5bfa688d444e9450d8ea30820a7, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 5689047531786446639, guid: 69dff5bfa688d444e9450d8ea30820a7, type: 3}
+      propertyPath: gridWorldSize.x
+      value: 380
+      objectReference: {fileID: 0}
+    - target: {fileID: 5689047531786446639, guid: 69dff5bfa688d444e9450d8ea30820a7, type: 3}
+      propertyPath: displayGridGizmos
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 8416523553391963777, guid: 69dff5bfa688d444e9450d8ea30820a7, type: 3}
+      propertyPath: m_Name
+      value: Astar
+      objectReference: {fileID: 0}
+    - target: {fileID: 8416523553391963777, guid: 69dff5bfa688d444e9450d8ea30820a7, type: 3}
+      propertyPath: m_TagString
+      value: Astar
+      objectReference: {fileID: 0}
+    m_RemovedComponents: []
+    m_RemovedGameObjects: []
+    m_AddedGameObjects: []
+    m_AddedComponents: []
+  m_SourcePrefab: {fileID: 100100000, guid: 69dff5bfa688d444e9450d8ea30820a7, type: 3}
 --- !u!1 &224045759
 GameObject:
   m_ObjectHideFlags: 0
@@ -5709,8 +5783,6 @@ MonoBehaviour:
   - {fileID: 1019422448}
   - {fileID: 1499246553}
   mapmanager: {fileID: 1891772358}
-  Astar: {fileID: 8416523553391963777, guid: 69dff5bfa688d444e9450d8ea30820a7, type: 3}
-  astar: {fileID: 0}
   tileMapNumber: 0
   IsMonsterAllDie: 0
   monsterCount: 0
@@ -24941,6 +25013,10 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 285667954579490873, guid: e04baa346da44244ebbd37cc07857477, type: 3}
+      propertyPath: m_BodyType
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 633271679516154034, guid: e04baa346da44244ebbd37cc07857477, type: 3}
       propertyPath: m_SortingOrder
       value: 201
@@ -25022,6 +25098,10 @@ PrefabInstance:
       value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 5575593775854796601, guid: e04baa346da44244ebbd37cc07857477, type: 3}
+      propertyPath: SlimeStat.Array.data[0]
+      value: 3
+      objectReference: {fileID: 0}
+    - target: {fileID: 5575593775854796601, guid: e04baa346da44244ebbd37cc07857477, type: 3}
       propertyPath: SlimeStat.Array.data[2]
       value: 5
       objectReference: {fileID: 0}
@@ -25051,7 +25131,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 8285911974114305580, guid: e04baa346da44244ebbd37cc07857477, type: 3}
       propertyPath: m_Name
-      value: BlueSlime_origin
+      value: PlayerOne
       objectReference: {fileID: 0}
     - target: {fileID: 8285911974114305580, guid: e04baa346da44244ebbd37cc07857477, type: 3}
       propertyPath: m_TagString
@@ -25061,7 +25141,8 @@ PrefabInstance:
       propertyPath: m_SortingOrder
       value: 202
       objectReference: {fileID: 0}
-    m_RemovedComponents: []
+    m_RemovedComponents:
+    - {fileID: -7910965004361879363, guid: e04baa346da44244ebbd37cc07857477, type: 3}
     m_RemovedGameObjects: []
     m_AddedGameObjects:
     - targetCorrespondingSourceObject: {fileID: 6433506678479375641, guid: e04baa346da44244ebbd37cc07857477, type: 3}
@@ -35949,7 +36030,7 @@ GameObject:
   - component: {fileID: 1728140578}
   m_Layer: 0
   m_Name: gm
-  m_TagString: Untagged
+  m_TagString: GameManager
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -46328,3 +46409,4 @@ SceneRoots:
   - {fileID: 1114591970}
   - {fileID: 150224735}
   - {fileID: 1728140579}
+  - {fileID: 220254833}

@@ -68,7 +68,8 @@ public class Sans : Monster
 
     public void ChangeAttack()
     {
-        animator.SetBool("Attack", false);
+        if(gameObject != null)
+            animator.SetBool("Attack", false);
     }
 
     protected override void MonsterDefaultAttack() //몬스터 사격
@@ -81,27 +82,6 @@ public class Sans : Monster
         if (_StayObj != null) return;
 
         animator.SetBool("Attack", true); //애니메이션 공격은 어택 죽음은 데스로 통일
-
-
-        if (_IsSoul == _isSoul.NULL) //Ai
-        {
-            //4방향으로 위치잡아서 쏘는거
-
-            //if (Mathf.Abs(GetComponent<Rigidbody2D>().velocity.x) > Mathf.Abs(GetComponent<Rigidbody2D>().velocity.y))
-            //{
-            //    if (GetComponent<Rigidbody2D>().velocity.x < 0)
-            //        dir = Vector2.left;
-            //    else
-            //        dir = Vector2.right;
-            //}
-            //else
-            //{
-            //    if (GetComponent<Rigidbody2D>().velocity.y > 0)
-            //        dir = Vector2.up;
-            //    else
-            //        dir = Vector2.down;
-            //}
-        }
 
         if (_IsSoul == _isSoul.Death) return;
         GameObject _object = Instantiate(Bullet, (Vector2)_Blaster.transform.position + _dir * _PositionOffset, Quaternion.identity); //총알소환

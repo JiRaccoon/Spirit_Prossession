@@ -31,7 +31,7 @@ public class GreenSlime : Monster
             return;
         // Slime's Attack
         lastShootTime = Time.time;
-        if (_StayObj != null) return;
+        if (_StayObj != null || _IsSoul == _isSoul.Death) return;
         animator.SetTrigger("Attack"); //애니메이션 공격은 어택 죽음은 데스로 통일
         GameObject _object = Instantiate(Bullet, transform.position, Quaternion.identity); //총알소환
         GameObject _object2 = Instantiate(Bullet, transform.position, Quaternion.identity); //총알소환2

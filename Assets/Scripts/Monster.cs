@@ -22,6 +22,8 @@ public class Monster : MonoBehaviour
 
     [SerializeField]
     protected _isSoul _IsSoul;
+
+    private _isSoul _tempSoul;
     public struct _Stats { // Monsters Stats
         public float _MaxHp;
         public float _Hp; 
@@ -44,6 +46,8 @@ public class Monster : MonoBehaviour
 
     private Camera mainCamera;
 
+    private GM _GM;
+
 
     protected void Init(float[] argStats) 
     {
@@ -57,6 +61,7 @@ public class Monster : MonoBehaviour
         animator = GetComponent<Animator>();
         _Ddir = Vector2.zero; // 샌즈때문에 넣었어요 - 손준호
         mainCamera = Camera.main;
+        _GM = GameObject.FindWithTag("GameManager").GetComponent<GM>();
     }
 
     private void Update()
@@ -208,10 +213,12 @@ public class Monster : MonoBehaviour
 
     protected void MonsterDie()
     {
-        if (_IsSoul == _isSoul.PlayerOne || _IsSoul == _isSoul.PlayerTwo)
+        if (_tempSoul == _isSoul.PlayerOne || _tempSoul == _isSoul.PlayerTwo)
         {
             GameObject soul = Instantiate(_PlayerSoul, transform.position, Quaternion.identity);
-            soul.GetComponent<SpriteRenderer>().sprite = _IsSoul == _isSoul.PlayerOne ? _SoulSprits[0] : _SoulSprits[1];
+            soul.GetComponent<SpriteRenderer>().sprite = _tempSoul == _isSoul.PlayerOne ? _SoulSprits[0] : _SoulSprits[1];
+            _GM.PlayerExist--;
+            if (_GM.PlayerExist == 0) _GM.LoadDeathScene();
             Destroy(gameObject);
         }
         else
@@ -219,17 +226,13 @@ public class Monster : MonoBehaviour
             transform.GetComponent<BoxCollider2D>().isTrigger = true;
             GetComponent<PathFinding>().moveSpeed = 0;
             GameObject.FindGameObjectWithTag("MonsterManager").GetComponent<MonsterManager>().RemoveMonster(this.gameObject);
-        }
-
-        rb.constraints = RigidbodyConstraints2D.FreezePosition;
-        _IsSoul = _isSoul.Death;
+        }      
     }
 
     public void takeDamage(float argDmg)
     {
         if (stats._Hp <= 0) return;
         stats._Hp -= argDmg;
-        //Debug.Log(stats._Hp);
 
         if(_IsSoul!=_isSoul.NULL)
         {
@@ -241,6 +244,9 @@ public class Monster : MonoBehaviour
 
         if(stats._Hp <= 0)
         {
+            _tempSoul = _IsSoul;
+            _IsSoul = _isSoul.Death;
+            rb.constraints = RigidbodyConstraints2D.FreezeAll;
             animator.SetBool("Death",true);
             //MonsterDie();
         }
@@ -272,26 +278,31 @@ public class Monster : MonoBehaviour
 
     private void pushSoul()
     {
-        if (_StayObj == null) return;
+        if (!_HaveSoul) return;
 
-        if (Input.GetKey(KeyCode.F) || Input.GetKey(KeyCode.K))
+        if (Input.GetKeyDown(KeyCode.F) || Input.GetKeyDown(KeyCode.K))
         {
+            if (_StayObj == null) return;
+            GameObject temp = _StayObj.gameObject;
             _HaveSoul = false;
-            _StayObj.tag = "Player";
-            _StayObj.GetComponent<Monster>()._IsSoul = _IsSoul == _isSoul.PlayerOne ? _isSoul.PlayerTwo : _isSoul.PlayerOne;
-            _StayObj.name = _IsSoul == _isSoul.PlayerOne ? "PlayerTwo" : "PlayerOne";
-            _StayObj.GetComponent<Monster>().ResetStat();
-            if (_StayObj.GetComponent<Sans>())
+
+            temp.tag = "Player";
+            temp.GetComponent<Monster>()._IsSoul = _IsSoul == _isSoul.PlayerOne ? _isSoul.PlayerTwo : _isSoul.PlayerOne;
+            temp.name = _IsSoul == _isSoul.PlayerOne ? "PlayerTwo" : "PlayerOne";
+            temp.GetComponent<Monster>().ResetStat();
+            if (temp.GetComponent<Sans>())
             {// 샌즈때문에 넣었어요 - 손준호
-                _StayObj.GetComponent<Sans>().ReInitPlayerModeStat();
+                temp.GetComponent<Sans>().ReInitPlayerModeStat();
             }
             _StayObj = null;
+            temp = null;
         }
     }
 
     public void ResetStat()
     {
         stats._Hp = stats._MaxHp;
+        _GM.PlayerExist++;
         GetComponent<BoxCollider2D>().isTrigger = false;
         animator.SetBool("Death", false);
         int pNum = _IsSoul == _isSoul.PlayerOne ? 0 : 1;

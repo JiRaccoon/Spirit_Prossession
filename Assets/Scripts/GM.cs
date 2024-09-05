@@ -5,18 +5,22 @@ using UnityEngine.SceneManagement;
 
 public class GM : MonoBehaviour
 {
+    private int _PlayerExist = 2;
+    public int PlayerExist { get { return _PlayerExist; } set { _PlayerExist = value; } }
+
     // Start is called before the first frame update
     void Start()
     {
         Application.targetFrameRate = 60;
     }
 
-    // Update is called once per frame
-    void Update()
+    public void LoadDeathScene()
     {
-        if(Input.GetKeyDown(KeyCode.Y))
-        {
-            SceneManager.LoadScene(2);
-        }
+        Invoke("LoadDeathScene2", 2.0f);
+    }
+
+    public void LoadDeathScene2()
+    {
+        SceneManager.LoadScene(2);
     }
 }

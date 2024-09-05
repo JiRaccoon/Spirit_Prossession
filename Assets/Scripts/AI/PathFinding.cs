@@ -48,24 +48,33 @@ public class PathFinding : MonoBehaviour
     public bool isWalk;
     public bool isWalking;
 
+    private Monster _monster;
+
     private void Awake()
     {
         // 격자 생성
-        this.grid = GameObject.Find("Astar").GetComponent<Grid>();
-        //grid = GetComponent<Grid>();
+        this.grid = GameObject.FindWithTag("Astar").GetComponent<Grid>();
         walkable = true;
     }
     private void Start()
     {
         // 초깃값 초기화.
         this.isWalking = false;
-        this.moveSpeed = GetComponent<Monster>().stats._MoveSpeed;
+        this._monster = GetComponent<Monster>();
+        this.moveSpeed = _monster.stats._MoveSpeed;
+
         this.range = 4f;
     }
 
     private void FixedUpdate()
     {
-        if (this.GetComponent<Monster>().checkAi())
+        if (this._monster.stats._Hp <= 0)
+        {
+            StopAllCoroutines();
+            return;
+        }
+
+        if (this._monster.checkAi())
         {
             //this.target = this.grid._Player_transform[0];
             LangeTarget(grid._Player_transform);

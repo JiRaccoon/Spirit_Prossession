@@ -9,7 +9,8 @@ public class SpawnPoint : MonoBehaviour
 
     public void CreateEnemy()
     {
-        StartCoroutine(instant(spawnTime, monster));
+        if(gameObject.activeSelf)
+            StartCoroutine(instant(spawnTime, monster));
     }
 
     IEnumerator instant(float spawnTime, GameObject monster)

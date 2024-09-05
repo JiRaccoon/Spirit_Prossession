@@ -29,23 +29,19 @@ public class Bullet : MonoBehaviour
             collision.transform.GetComponent<BreakTile>().MakeDot(closestPoint + new Vector2(offset,0));
         }
 
-
         if (_MyObj == collision.name) return;
+
         if (collision.tag == "Soul" || collision.tag == "Bullet")
             return;
 
-
-        Debug.Log(collision.name);
-
         if (collision.gameObject.GetComponent<Monster>())
         {
+            if (collision.gameObject.GetComponent<Monster>().CheckDie()) return;
+
             collision.gameObject.GetComponent<Monster>().takeDamage(_Dmg);
+            Destroy(gameObject);
         }
 
-        if (collision.gameObject.GetComponent<Monster>() && collision.gameObject.GetComponent<Monster>().CheckDie())
-        {
-            return;
-        }
         Destroy(gameObject);
     }
 }

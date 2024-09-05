@@ -12,7 +12,7 @@ GameObject:
   - component: {fileID: 5689047531786446639}
   m_Layer: 0
   m_Name: Astar
-  m_TagString: Untagged
+  m_TagString: Astar
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -47,7 +47,7 @@ MonoBehaviour:
   _Player_transform:
   - {fileID: 0}
   - {fileID: 0}
-  displayGridGizmos: 1
+  displayGridGizmos: 0
   monster: {fileID: 0}
   OBSTACLE:
     serializedVersion: 2

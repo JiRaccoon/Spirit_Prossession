@@ -64,7 +64,7 @@ public class Grid : MonoBehaviour
         }
     }
 //#endif
-*/
+//*/
     // 격자 생성 함수
     void CreateGrid()
     {
